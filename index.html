@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KJ-Tuki – Tietotekniikka-apua kotiin</title>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --gray: #64748b;
+      --accent: #22c55e;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    body.dark {
+      background: #020617;
+      color: #e5e7eb;
+    }
+
+    header {
+      background: linear-gradient(135deg, var(--primary), #1e40af);
+      color: white;
+      padding: 4rem 1.5rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .top-controls {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .top-controls button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      opacity: 0.85;
+    }
+
+    .top-controls button:hover {
+      opacity: 1;
+    }
+
+    section {
+      padding: 3rem 1.5rem;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--primary);
+    }
+
+    body.dark h2 {
+      color: #60a5fa;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 36px rgba(0,0,0,0.15);
+    }
+
+    body.dark .card {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.03)
+      );
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.55);
+      backdrop-filter: blur(6px);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    body.dark .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.7);
+    }
+
+    body.dark .card {
+      background: #020617;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .highlight {
+      background: #eef2ff;
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 0.75rem;
+    }
+
+    body.dark .highlight {
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.05)
+      );
+      border: 1px solid rgba(255,255,255,0.18);
+      border-left: 5px solid #60a5fa;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.65);
+      backdrop-filter: blur(8px);
+    }
+
+    body.dark .highlight {
+      background: #020617;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li {
+      padding-left: 1.5rem;
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    .contact {
+      background: var(--dark);
+      color: white;
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: var(--gray);
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="top-controls">
+    <button onclick="setLang('fi')">FI</button>
+    <button onclick="setLang('en')">EN</button>
+    <button onclick="setLang('ru')">RU</button>
+    <button onclick="toggleTheme()">🌙 / ☀️</button>
+  </div>
+  <h1 id="title">KJ-Tuki – IT-tuki Turussa</h1>
+  <p id="tagline">Yli 15 vuoden kokemus tietotekniikasta – selkeää ja luotettavaa IT-apua kotiin Turussa ja lähialueilla.</p>
+</header>
+
+<section>
+  <div class="highlight">
+  <strong id="onsite_title">Palvelu tapahtuu aina paikan päällä.</strong><br />
+  <span id="onsite_text">Kaikki työt tehdään paikan päällä – ei etätukea.</span>
+  </div>
+
+</section>
+
+<section>
+  <h2 id="servicesTitle">Palvelut</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 id="srv_net_title">Kotinetti & WiFi</h3>
+      <ul>
+        <li id="srv_net_1">Hidas tai pätkivä netti</li>
+        <li id="srv_net_2">Reitittimen asetukset</li>
+        <li id="srv_net_3">Kotiverkon ongelmat</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 id="srv_pc_title">Tietokoneet</h3>
+      <ul>
+        <li id="srv_pc_1">Windows & MacOS</li>
+        <li id="srv_pc_2">Asennukset ja päivitykset</li>
+        <li id="srv_pc_3">Virustorjunta</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 id="srv_mobile_title">Puhelimet & Tabletit</h3>
+      <ul>
+        <li id="srv_mobile_1">Android & iOS</li>
+        <li id="srv_mobile_2">Sähköposti ja asetukset</li>
+        <li id="srv_mobile_3">Tiedonsiirrot</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3 id="srv_tv_title">Älytelevisiot</h3>
+      <ul>
+        <li id="srv_tv_1">Smart TV</li>
+        <li id="srv_tv_2">Chromecast</li>
+        <li id="srv_tv_3">Suoratoistopalvelut</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2 id="pricingTitle">Hinnat & Alue</h2>
+  <div class="grid">
+    <div class="card">
+      <h3 id="area_title">Toimialue</h3>
+      <p id="area_text">Turku, Kaarina, Raisio, Lieto, Naantali, Masku, Rusko ja lähialueet.</p>
+    </div>
+
+    <div class="card">
+      <h3 id="price_title">Hinta</h3>
+      <p id="price_text"><strong>60 € / h</strong><br />Minimiveloitus 1 h, sen jälkeen 15 min välein<br />Matkakulut: 0,55 € / km<br /> Etäisyys lasketaan Itäharjun Prismalta</p>
+    </div>
+
+    <div class="card">
+      <h3 id="time_title">Aika</h3>
+      <p id="time_text">Arki-iltaisin klo 17 jälkeen<br />Viikonloppuisin sopimuksen mukaan</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contact">
+    <h2 id="contactTitle">Ota yhteyttä</h2>
+    <p id="contactText">Ota yhteyttä suoraan – vastaan nopeasti.</p>
+
+    <div style="margin-top:1.5rem;font-size:1.1rem;line-height:1.8">
+      <p>📧 <strong id="email_label">Sähköposti:</strong><br />
+        <a href="mailto:@tuta.io" class="contact-link">@tuta.io</a>
+      </p>
+
+      <p style="margin-top:1rem">📞 <strong id="phone_label">Puhelin:</strong><br />
+        <a href="tel:+123123123" class="contact-link">123123123</a>
+      </p>
+    </div>
+
+    <p id="billing_text" style="margin-top:2rem">
+  Laskutus hoidetaan UKKO.fi-palvelun kautta.
+    </p>
+
+  </div>
+</section>
+
+<!--<footer>© 2025 </footer>-->
+
+<script>
+  function toggleTheme() {
+    document.body.classList.toggle('dark');
+  }
+
+  const texts = {
+  fi: {
+    title: 'KJ-Tuki  –  IT-tuki Turussa',
+    onsite_title: 'Palvelu tapahtuu aina paikan päällä.',
+    onsite_text: 'Kaikki työt tehdään paikan päällä – ei etätukea.',
+    email_label: 'Sähköposti:',
+    phone_label: 'Puhelin:',
+    billing_text: 'Laskutus hoidetaan UKKO.fi-palvelun kautta.',
+    tagline: 'Yli 15 vuoden kokemus tietotekniikasta – selkeää ja luotettavaa IT-apua kotiin Turussa ja lähialueilla.',
+    onsite: 'Palvelu tapahtuu aina paikan päällä. Ei etätukea – autan kasvotusten ja hoidan ongelmat käytännössä.',
+    servicesTitle: 'Palvelut',
+    pricingTitle: 'Hinnat & Alue',
+    contactTitle: 'Ota yhteyttä',
+    contactText: 'Voit ottaa yhteyttä sähköpostilla, puhelimitse tai lomakkeella.',
+    services: {
+      net_title: 'Kotinetti & WiFi',
+      net_1: 'Hidas tai pätkivä netti',
+      net_2: 'Reitittimen asetukset',
+      net_3: 'Kotiverkon ongelmat',
+      pc_title: 'Tietokoneet',
+      pc_1: 'Windows & MacOS',
+      pc_2: 'Asennukset ja päivitykset',
+      pc_3: 'Virustorjunta',
+      mobile_title: 'Puhelimet & Tabletit',
+      mobile_1: 'Android & iOS',
+      mobile_2: 'Sähköposti ja asetukset',
+      mobile_3: 'Tiedonsiirrot',
+      tv_title: 'Älytelevisiot',
+      tv_1: 'Smart TV',
+      tv_2: 'Chromecast',
+      tv_3: 'Suoratoistopalvelut'
+    },
+    pricing: {
+      area_title: 'Toimialue',
+      area_text: 'Turku, Kaarina, Raisio, Lieto, Naantali, Masku, Rusko ja lähialueet.',
+      price_title: 'Hinta',
+      price_text: '<strong>60 € / h</strong><br />Minimiveloitus 1 h, sen jälkeen 15 min välein<br />Matkakulut: 0,55 € / km<br />Etäisyys lasketaan Itäharjun Prismalta',
+      time_title: 'Aika',
+      time_text: 'Arki-iltaisin klo 17 jälkeen<br />Viikonloppuisin sopimuksen mukaan'
+    }
+  },
+  en: {
+    title: 'KJ-Tuki  –  IT support in Turku',
+    onsite_title: 'Service is always provided on-site.',
+    onsite_text: 'All work is done on-site – no remote support.',
+    email_label: 'Email:',
+    phone_label: 'Phone:',
+    billing_text: 'Billing is handled via the UKKO.fi service.',
+    tagline: 'Over 15 years of IT experience – clear and reliable home IT support in the Turku area.',
+    onsite: 'Service is always provided on-site. No remote support – hands-on help at your home.',
+    servicesTitle: 'Services',
+    pricingTitle: 'Pricing & Area',
+    contactTitle: 'Contact',
+    contactText: 'You can contact via email, phone, or the form below.',
+    services: {
+      net_title: 'Home Internet & WiFi',
+      net_1: 'Slow or unstable internet',
+      net_2: 'Router configuration',
+      net_3: 'Home network issues',
+      pc_title: 'Computers',
+      pc_1: 'Windows & macOS',
+      pc_2: 'Installations and updates',
+      pc_3: 'Virus protection',
+      mobile_title: 'Phones & Tablets',
+      mobile_1: 'Android & iOS',
+      mobile_2: 'Email and settings',
+      mobile_3: 'Data transfers',
+      tv_title: 'Smart TVs',
+      tv_1: 'Smart TV setup',
+      tv_2: 'Chromecast',
+      tv_3: 'Streaming services'
+    },
+    pricing: {
+      area_title: 'Service area',
+      area_text: 'Turku, Kaarina, Raisio, Lieto, Naantali, Masku, Rusko and nearby areas.',
+      price_title: 'Price',
+      price_text: '<strong>60 € / hour</strong><br />Minimum charge 1 hour, then billed in 15-minute increments<br />Travel costs: 0.55 € / km<br />From Prisma Itäharju',
+      time_title: 'Availability',
+      time_text: 'Weekdays after 5 PM<br />Weekends by agreement'
+    }
+  },
+  ru: {
+    title: 'KJ-Tuki  –  IT-помощь в Турку',
+    onsite_title: 'Обслуживание выполняется только на месте.',
+    onsite_text: 'Все работы выполняются лично на месте — удалённая поддержка не предоставляется.',
+    email_label: 'Электронная почта:',
+    phone_label: 'Телефон:',
+    billing_text: 'Выставление счетов осуществляется через сервис UKKO.fi.',
+    tagline: 'Более 15 лет опыта в IT — понятная и надёжная помощь на дому в регионе Турку.',
+    onsite: 'Обслуживание только на месте. Удалённую помощь не предоставляю — работаю лично у вас дома.',
+    servicesTitle: 'Услуги',
+    pricingTitle: 'Цены и регион',
+    contactTitle: 'Контакты',
+    contactText: 'Свяжитесь по электронной почте, телефону или через форму.',
+    services: {
+      net_title: 'Домашний интернет и Wi-Fi',
+      net_1: 'Медленный или нестабильный интернет',
+      net_2: 'Настройка роутера',
+      net_3: 'Проблемы домашней сети',
+      pc_title: 'Компьютеры',
+      pc_1: 'Windows и macOS',
+      pc_2: 'Установка и обновления',
+      pc_3: 'Антивирусная защита',
+      mobile_title: 'Телефоны и планшеты',
+      mobile_1: 'Android и iOS',
+      mobile_2: 'Почта и настройки',
+      mobile_3: 'Передача данных',
+      tv_title: 'Смарт-телевизоры',
+      tv_1: 'Настройка Smart TV',
+      tv_2: 'Chromecast',
+      tv_3: 'Стриминговые сервисы'
+    },
+    pricing: {
+      area_title: 'Регион обслуживания',
+      area_text: 'Турку, Каарина, Райсио, Лието, Наантали, Маску, Руcко и близлежащие районы.',
+      price_title: 'Цена',
+      price_text: '<strong>60 € / час</strong><br />Минимальная оплата — 1 час, далее — с шагом 15 минут.<br />Транспортные расходы: 0,55 € / км<br />От Prisma Itäharju',
+      time_title: 'Время работы',
+      time_text: 'По будням после 17:00<br />По выходным по договорённости'
+    }
+  }
+};
+
+  function setLang(lang) {
+  const t = texts[lang];
+  document.getElementById('title').innerText = t.title;
+  document.getElementById('tagline').innerText = t.tagline;
+  document.getElementById('servicesTitle').innerText = t.servicesTitle;
+  document.getElementById('pricingTitle').innerText = t.pricingTitle;
+  document.getElementById('contactTitle').innerText = t.contactTitle;
+  document.getElementById('contactText').innerText = t.contactText;
+
+  document.getElementById('srv_net_title').innerText = t.services.net_title;
+  document.getElementById('srv_net_1').innerText = t.services.net_1;
+  document.getElementById('srv_net_2').innerText = t.services.net_2;
+  document.getElementById('srv_net_3').innerText = t.services.net_3;
+
+  document.getElementById('srv_pc_title').innerText = t.services.pc_title;
+  document.getElementById('srv_pc_1').innerText = t.services.pc_1;
+  document.getElementById('srv_pc_2').innerText = t.services.pc_2;
+  document.getElementById('srv_pc_3').innerText = t.services.pc_3;
+
+  document.getElementById('srv_mobile_title').innerText = t.services.mobile_title;
+  document.getElementById('srv_mobile_1').innerText = t.services.mobile_1;
+  document.getElementById('srv_mobile_2').innerText = t.services.mobile_2;
+  document.getElementById('srv_mobile_3').innerText = t.services.mobile_3;
+
+  document.getElementById('srv_tv_title').innerText = t.services.tv_title;
+  document.getElementById('srv_tv_1').innerText = t.services.tv_1;
+  document.getElementById('srv_tv_2').innerText = t.services.tv_2;
+  document.getElementById('srv_tv_3').innerText = t.services.tv_3;
+
+  document.getElementById('area_title').innerText = t.pricing.area_title;
+  document.getElementById('area_text').innerHTML = t.pricing.area_text;
+  document.getElementById('price_title').innerText = t.pricing.price_title;
+  document.getElementById('price_text').innerHTML = t.pricing.price_text;
+  document.getElementById('time_title').innerText = t.pricing.time_title;
+  document.getElementById('time_text').innerHTML = t.pricing.time_text;
+  document.getElementById('onsite_title').innerText = t.onsite_title;
+  document.getElementById('onsite_text').innerText = t.onsite_text;
+  document.getElementById('email_label').innerText = t.email_label;
+  document.getElementById('phone_label').innerText = t.phone_label;
+  document.getElementById('billing_text').innerText = t.billing_text;
+
+}
+</script>
+
+</body>
+</html>
