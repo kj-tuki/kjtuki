@@ -32,7 +32,7 @@
     }
 
     header {
-      background: linear-gradient(135deg, var(--primary), #1e40af);
+      background: linear-gradient(135deg, var(--primary), #05ee5e);
       color: white;
       padding: 4rem 1.5rem;
       text-align: center;
@@ -160,7 +160,7 @@
     }
 
     .contact {
-      background: var(--dark);
+      background: linear-gradient(135deg, var(--primary), #05ee5e);
       color: white;
       border-radius: 1.5rem;
       padding: 2.5rem;
@@ -178,6 +178,11 @@
 <body>
 
 <header>
+  <style>
+    .top-controls button {
+      font-weight: bold;
+    }
+  </style>
   <div class="top-controls">
     <button onclick="setLang('fi')">FI</button>
     <button onclick="setLang('en')">EN</button>
